@@ -1,0 +1,292 @@
+resources:
+- name: buildpack-store
+  type: s3
+  source:
+    bucket: ((s3_bucket))
+    access_key_id: ((s3_access_key_id))
+    secret_access_key: ((s3_secret_access_key))
+- name: ci-scripts
+  type: git
+  source:
+    uri: https://github.com/orange-cloudfoundry/ci-buildpack-cached.git
+- name: php-bp-release
+  type: git
+  source:
+    uri: https://github.com/cloudfoundry/php-buildpack.git
+    tag_filter: "v*"
+- name: go-bp-release
+  type: git
+  source:
+    uri: https://github.com/cloudfoundry/go-buildpack.git
+    tag_filter: "v*"
+- name: ruby-bp-release
+  type: git
+  source:
+    uri: https://github.com/cloudfoundry/ruby-buildpack.git
+    tag_filter: "v*"
+- name: python-bp-release
+  type: git
+  source:
+    uri: https://github.com/cloudfoundry/python-buildpack.git
+    tag_filter: "v*"
+- name: binary-bp-release
+  type: git
+  source:
+    uri: https://github.com/cloudfoundry/binary-buildpack.git
+    tag_filter: "v*"
+- name: staticfile-bp-release
+  type: git
+  source:
+    uri: https://github.com/cloudfoundry/staticfile-buildpack.git
+    tag_filter: "v*"
+- name: nodejs-bp-release
+  type: git
+  source:
+    uri: https://github.com/cloudfoundry/nodejs-buildpack.git
+    tag_filter: "v*"
+- name: java-bp-release
+  type: github-release
+  source:
+    owner: cloudfoundry
+    repository: java-buildpack
+    access_token: ((github-access-token))
+
+groups:
+- name: php
+  jobs:
+  - deploy-php
+- name: go
+  jobs:
+  - deploy-go
+- name: ruby
+  jobs:
+  - deploy-ruby
+- name: python
+  jobs:
+  - deploy-python
+- name: binary
+  jobs:
+  - deploy-binary
+- name: staticfile
+  jobs:
+  - deploy-staticfile
+- name: java
+  jobs:
+  - deploy-java
+- name: nodejs
+  jobs:
+  - deploy-nodejs
+
+jobs:
+- name: deploy-php
+  serial: true
+  plan:
+  - aggregate:
+    - get: ci-scripts
+    - get: php-bp-release
+      trigger: true
+  - task: deploy-php
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source: { repository: orangeopensource/concourse, tag: "buildpack" }
+      inputs:
+      - name: php-bp-release
+        path: bp-release
+      - name: ci-scripts
+      outputs:
+      - name: bp-cached
+      run:
+        path: ci-scripts/scripts/ruby-packager.sh
+        args: [php]
+  - put: buildpack-store
+    params:
+      file: "*.zip"
+
+
+- name: deploy-go
+  serial: true
+  plan:
+  - aggregate:
+    - get: ci-scripts
+    - get: go-bp-release
+      trigger: true
+  - task: deploy-go
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source: { repository: orangeopensource/concourse, tag: "buildpack" }
+      inputs:
+      - name: go-bp-release
+        path: bp-release
+      - name: ci-scripts
+      outputs:
+      - name: bp-cached
+      run:
+        path: ci-scripts/scripts/go-packager.sh
+        args: [go]
+  - put: buildpack-store
+    params:
+      file: "*.zip"
+
+
+- name: deploy-ruby
+  serial: true
+  plan:
+  - aggregate:
+    - get: ci-scripts
+    - get: ruby-bp-release
+      trigger: true
+  - task: deploy-ruby
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source: { repository: orangeopensource/concourse, tag: "buildpack" }
+      inputs:
+      - name: ruby-bp-release
+        path: bp-release
+      - name: ci-scripts
+      outputs:
+      - name: bp-cached
+      run:
+        path: ci-scripts/scripts/go-packager.sh
+        args: [ruby]
+  - put: buildpack-store
+    params:
+      file: "*.zip"
+
+- name: deploy-python
+  serial: true
+  plan:
+  - aggregate:
+    - get: ci-scripts
+    - get: python-bp-release
+      trigger: true
+  - task: deploy-python
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source: { repository: orangeopensource/concourse, tag: "buildpack" }
+      inputs:
+      - name: python-bp-release
+        path: bp-release
+      - name: ci-scripts
+      outputs:
+      - name: bp-cached
+      run:
+        path: ci-scripts/scripts/go-packager.sh
+        args: [python]
+  - put: buildpack-store
+    params:
+      file: "*.zip"
+
+- name: deploy-binary
+  serial: true
+  plan:
+  - aggregate:
+    - get: ci-scripts
+    - get: binary-bp-release
+      trigger: true
+  - task: deploy-binary
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source: { repository: orangeopensource/concourse, tag: "buildpack" }
+      inputs:
+      - name: binary-bp-release
+        path: bp-release
+      - name: ci-scripts
+      outputs:
+      - name: bp-cached
+      run:
+        path: ci-scripts/scripts/go-packager.sh
+        args: [binary]
+  - put: buildpack-store
+    params:
+      file: "*.zip"
+
+- name: deploy-staticfile
+  serial: true
+  plan:
+  - aggregate:
+    - get: ci-scripts
+    - get: staticfile-bp-release
+      trigger: true
+  - task: deploy-staticfile
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source: { repository: orangeopensource/concourse, tag: "buildpack" }
+      inputs:
+      - name: staticfile-bp-release
+        path: bp-release
+      - name: ci-scripts
+      outputs:
+      - name: bp-cached
+      run:
+        path: ci-scripts/scripts/go-packager.sh
+        args: [staticfile]
+  - put: buildpack-store
+    params:
+      file: "*.zip"
+
+- name: deploy-java
+  serial: true
+  plan:
+  - aggregate:
+    - get: ci-scripts
+    - get: java-bp-release
+      params:
+        include_source_tarball: true
+      trigger: true
+  - task: deploy-java
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source: { repository: orangeopensource/concourse, tag: "buildpack" }
+      inputs:
+      - name: java-bp-release
+        path: bp-release
+      - name: ci-scripts
+      outputs:
+      - name: bp-cached
+      run:
+        path: ci-scripts/scripts/rake-packager.sh
+        args: [java]
+  - put: buildpack-store
+    params:
+      file: "*.zip"
+
+- name: deploy-nodejs
+  serial: true
+  plan:
+  - aggregate:
+    - get: ci-scripts
+    - get: nodejs-bp-release
+      trigger: true
+  - task: deploy-nodejs
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source: { repository: orangeopensource/concourse, tag: "buildpack" }
+      inputs:
+      - name: nodejs-bp-release
+        path: bp-release
+      - name: ci-scripts
+      outputs:
+      - name: bp-cached
+      run:
+        path: ci-scripts/scripts/go-packager.sh
+        args: [nodejs]
+  - put: buildpack-store
+    params:
+      file: "*.zip"
+

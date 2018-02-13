@@ -1,0 +1,108 @@
+- type: replace
+  path: /resource_types?/-
+  value:
+    name: slack-notification
+    type: docker-image
+    source:
+      repository: cfcommunity/slack-notification-resource
+      tag: latest
+
+- type: replace
+  path: /resources/-
+  value:
+    name: alert
+    type: slack-notification
+    source:
+      url: ((slack-hook-url))
+
+# php
+- type: replace
+  path: /jobs/name=deploy-php/on_failure?
+  value: &slack_on_failure
+    put: alert
+    params:
+      text: |
+        :x: Upload or caching failed for **$(cat bp-cached/name)** buildpack cached version **$(cat bp-cached/tag)**
+      username: concourse-buildpack
+      icon_url: http://cl.ly/image/3e1h0H3H2s0P/concourse-logo.png
+
+- type: replace
+  path: /jobs/name=deploy-php/on_success?
+  value: &slack_on_success
+    put: alert
+    params:
+      text: |
+        :heavy_check_mark: Upload succeeded for **$(cat bp-cached/name)** buildpack cached version **$(cat bp-cached/tag)**
+      username: concourse-buildpack
+      icon_url: http://cl.ly/image/3e1h0H3H2s0P/concourse-logo.png
+#####
+
+# go
+- type: replace
+  path: /jobs/name=deploy-go/on_failure?
+  value: *slack_on_failure
+
+- type: replace
+  path: /jobs/name=deploy-go/on_success?
+  value: *slack_on_success
+#####
+
+# ruby
+- type: replace
+  path: /jobs/name=deploy-ruby/on_failure?
+  value: *slack_on_failure
+
+- type: replace
+  path: /jobs/name=deploy-ruby/on_success?
+  value: *slack_on_success
+#####
+
+# python
+- type: replace
+  path: /jobs/name=deploy-python/on_failure?
+  value: *slack_on_failure
+
+- type: replace
+  path: /jobs/name=deploy-python/on_success?
+  value: *slack_on_success
+#####
+
+# binary
+- type: replace
+  path: /jobs/name=deploy-binary/on_failure?
+  value: *slack_on_failure
+
+- type: replace
+  path: /jobs/name=deploy-binary/on_success?
+  value: *slack_on_success
+#####
+
+# staticfile
+- type: replace
+  path: /jobs/name=deploy-staticfile/on_failure?
+  value: *slack_on_failure
+
+- type: replace
+  path: /jobs/name=deploy-staticfile/on_success?
+  value: *slack_on_success
+#####
+
+# java
+- type: replace
+  path: /jobs/name=deploy-java/on_failure?
+  value: *slack_on_failure
+
+- type: replace
+  path: /jobs/name=deploy-java/on_success?
+  value: *slack_on_success
+#####
+
+# nodejs
+- type: replace
+  path: /jobs/name=deploy-nodejs/on_failure?
+  value: *slack_on_failure
+
+- type: replace
+  path: /jobs/name=deploy-nodejs/on_success?
+  value: *slack_on_success
+#####
