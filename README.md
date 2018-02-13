@@ -1,6 +1,6 @@
 # ci-buildpack-cached
 
-Pipeline which create cached buildpack from cloud foundry and deploy it to storage system (default to s3) when a new version of buildpack has been released.
+Pipeline which create cached buildpack for cloud foundry when a new version of buildpack has been released and deploy it to storage system (default to s3).
 
 ## Use it on your concourse
 
