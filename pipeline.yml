@@ -52,6 +52,16 @@ resources:
     access_token: ((github-access-token))
 
 groups:
+- name: all
+  jobs:
+  - deploy-php
+  - deploy-go
+  - deploy-ruby
+  - deploy-python
+  - deploy-binary
+  - deploy-staticfile
+  - deploy-java
+  - deploy-nodejs
 - name: php
   jobs:
   - deploy-php
