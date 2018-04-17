@@ -1,10 +1,69 @@
 resources:
-- name: buildpack-store
+- name: php-buildpack-store
   type: s3
   source:
     bucket: ((s3_bucket))
     access_key_id: ((s3_access_key_id))
     secret_access_key: ((s3_secret_access_key))
+    regexp: php_buildpack-cached-v(.*).zip
+
+- name: go-buildpack-store
+  type: s3
+  source:
+    bucket: ((s3_bucket))
+    access_key_id: ((s3_access_key_id))
+    secret_access_key: ((s3_secret_access_key))
+    regexp: go_buildpack-cached-v(.*).zip
+
+- name: ruby-buildpack-store
+  type: s3
+  source:
+    bucket: ((s3_bucket))
+    access_key_id: ((s3_access_key_id))
+    secret_access_key: ((s3_secret_access_key))
+    regexp: ruby_buildpack-cached-v(.*).zip
+
+- name: python-buildpack-store
+  type: s3
+  source:
+    bucket: ((s3_bucket))
+    access_key_id: ((s3_access_key_id))
+    secret_access_key: ((s3_secret_access_key))
+    regexp: python_buildpack-cached-v(.*).zip
+
+- name: binary-buildpack-store
+  type: s3
+  source:
+    bucket: ((s3_bucket))
+    access_key_id: ((s3_access_key_id))
+    secret_access_key: ((s3_secret_access_key))
+    regexp: binary_buildpack-cached-v(.*).zip
+
+- name: staticfile-buildpack-store
+  type: s3
+  source:
+    bucket: ((s3_bucket))
+    access_key_id: ((s3_access_key_id))
+    secret_access_key: ((s3_secret_access_key))
+    regexp: staticfile_buildpack-cached-v(.*).zip
+
+- name: nodejs-buildpack-store
+  type: s3
+  source:
+    bucket: ((s3_bucket))
+    access_key_id: ((s3_access_key_id))
+    secret_access_key: ((s3_secret_access_key))
+    regexp: nodejs_buildpack-cached-v(.*).zip
+
+- name: java-buildpack-store
+  type: s3
+  source:
+    bucket: ((s3_bucket))
+    access_key_id: ((s3_access_key_id))
+    secret_access_key: ((s3_secret_access_key))
+    regexp: java-buildpack-offline-v(.*).zip
+
+
 - name: ci-scripts
   type: git
   source:
@@ -100,9 +159,9 @@ jobs:
       run:
         path: ci-scripts/scripts/ruby-packager.sh
         args: [php]
-  - put: buildpack-store
+  - put: php-buildpack-store
     params:
-      file: "*.zip"
+      file: "bp-cached/*.zip"
 
 
 - name: deploy-go
@@ -127,9 +186,9 @@ jobs:
       run:
         path: ci-scripts/scripts/go-packager.sh
         args: [go]
-  - put: buildpack-store
+  - put: go-buildpack-store
     params:
-      file: "*.zip"
+      file: "bp-cached/*.zip"
 
 
 - name: deploy-ruby
@@ -154,9 +213,9 @@ jobs:
       run:
         path: ci-scripts/scripts/go-packager.sh
         args: [ruby]
-  - put: buildpack-store
+  - put: ruby-buildpack-store
     params:
-      file: "*.zip"
+      file: "bp-cached/*.zip"
 
 - name: deploy-python
   serial: true
@@ -180,9 +239,9 @@ jobs:
       run:
         path: ci-scripts/scripts/go-packager.sh
         args: [python]
-  - put: buildpack-store
+  - put: python-buildpack-store
     params:
-      file: "*.zip"
+      file: "bp-cached/*.zip"
 
 - name: deploy-binary
   serial: true
@@ -206,9 +265,9 @@ jobs:
       run:
         path: ci-scripts/scripts/go-packager.sh
         args: [binary]
-  - put: buildpack-store
+  - put: binary-buildpack-store
     params:
-      file: "*.zip"
+      file: "bp-cached/*.zip"
 
 - name: deploy-staticfile
   serial: true
@@ -232,9 +291,9 @@ jobs:
       run:
         path: ci-scripts/scripts/go-packager.sh
         args: [staticfile]
-  - put: buildpack-store
+  - put: staticfile-buildpack-store
     params:
-      file: "*.zip"
+      file: "bp-cached/*.zip"
 
 - name: deploy-java
   serial: true
@@ -260,9 +319,9 @@ jobs:
       run:
         path: ci-scripts/scripts/rake-packager.sh
         args: [java]
-  - put: buildpack-store
+  - put: java-buildpack-store
     params:
-      file: "*.zip"
+      file: "bp-cached/*.zip"
 
 - name: deploy-nodejs
   serial: true
@@ -286,7 +345,7 @@ jobs:
       run:
         path: ci-scripts/scripts/go-packager.sh
         args: [nodejs]
-  - put: buildpack-store
+  - put: nodejs-buildpack-store
     params:
-      file: "*.zip"
+      file: "bp-cached/*.zip"
 
