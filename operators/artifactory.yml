@@ -7,76 +7,110 @@
       repository: orangeopensource/artifactory-resource
 
 - type: replace
-  path: /resources/name=buildpack-store/type
+  path: /resources/name=buildpack-store?/type
   value: artifactory
 
 - type: replace
-  path: /resources/name=buildpack-store/source
+  path: /resources/name=buildpack-store?/source
   value:
     url: ((artifactory-url))
     user: ((artifactory-username))
     password: ((artifactory-password))
 
-# go
+- type: remove
+  path: /resources/name=php-buildpack-store
+- type: remove
+  path: /resources/name=go-buildpack-store
+- type: remove
+  path: /resources/name=ruby-buildpack-store
+- type: remove
+  path: /resources/name=python-buildpack-store
+- type: remove
+  path: /resources/name=binary-buildpack-store
+- type: remove
+  path: /resources/name=staticfile-buildpack-store
+- type: remove
+  path: /resources/name=java-buildpack-store
+- type: remove
+  path: /resources/name=nodejs-buildpack-store
+
+
+# php
 - type: replace
-  path: /jobs/name=deploy-php/plan/put=buildpack-store/params
+  path: /jobs/name=deploy-php/plan/put=php-buildpack-store
   value:
-    target: cloudfoundry_buildpack_php/
-    source: "*.zip"
+    put: buildpack-store
+    params:
+      target: cloudfoundry_buildpack_php/
+      source: "*.zip"
 #####
 
 # go
 - type: replace
-  path: /jobs/name=deploy-go/plan/put=buildpack-store/params
+  path: /jobs/name=deploy-go/plan/put=go-buildpack-store
   value:
-    target: cloudfoundry_buildpack_go/
-    source: "*.zip"
+    put: buildpack-store
+    params:
+      target: cloudfoundry_buildpack_go/
+      source: "*.zip"
 #####
 
 # ruby
 - type: replace
-  path: /jobs/name=deploy-ruby/plan/put=buildpack-store/params
+  path: /jobs/name=deploy-ruby/plan/put=ruby-buildpack-store
   value:
-    target: cloudfoundry_buildpack_ruby/
-    source: "*.zip"
+    put: buildpack-store
+    params:
+      target: cloudfoundry_buildpack_ruby/
+      source: "*.zip"
 #####
 
 # python
 - type: replace
-  path: /jobs/name=deploy-python/plan/put=buildpack-store/params
+  path: /jobs/name=deploy-python/plan/put=python-buildpack-store
   value:
-    target: cloudfoundry_buildpack_python/
-    source: "*.zip"
+    put: buildpack-store
+    params:
+      target: cloudfoundry_buildpack_python/
+      source: "*.zip"
 #####
 
 # binary
 - type: replace
-  path: /jobs/name=deploy-binary/plan/put=buildpack-store/params
+  path: /jobs/name=deploy-binary/plan/put=binary-buildpack-store
   value:
-    target: cloudfoundry_buildpack_binary/
-    source: "*.zip"
+    put: buildpack-store
+    params:
+      target: cloudfoundry_buildpack_binary/
+      source: "*.zip"
 #####
 
 # staticfile
 - type: replace
-  path: /jobs/name=deploy-staticfile/plan/put=buildpack-store/params
+  path: /jobs/name=deploy-staticfile/plan/put=staticfile-buildpack-store
   value:
-    target: cloudfoundry_buildpack_staticfile/
-    source: "*.zip"
+    put: buildpack-store
+    params:
+      target: cloudfoundry_buildpack_staticfile/
+      source: "*.zip"
 #####
 
 # java
 - type: replace
-  path: /jobs/name=deploy-java/plan/put=buildpack-store/params
+  path: /jobs/name=deploy-java/plan/put=java-buildpack-store
   value:
-    target: cloudfoundry_buildpack_java/
-    source: "*.zip"
+    put: buildpack-store
+    params:
+      target: cloudfoundry_buildpack_java/
+      source: "*.zip"
 #####
 
 # nodejs
 - type: replace
-  path: /jobs/name=deploy-nodejs/plan/put=buildpack-store/params
+  path: /jobs/name=deploy-nodejs/plan/put=nodejs-buildpack-store
   value:
-    target: cloudfoundry_buildpack_nodejs/
-    source: "*.zip"
+    put: buildpack-store
+    params:
+      target: cloudfoundry_buildpack_nodejs/
+      source: "*.zip"
 #####
