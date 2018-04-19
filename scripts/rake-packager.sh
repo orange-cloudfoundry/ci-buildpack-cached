@@ -1,7 +1,7 @@
 #!/bin/sh
-set -x
+set -xe
 cd bp-release
-mkdir src
+mkdir -p src
 tar -xzf source.tar.gz -C src
 cd src/*
 bundle install
