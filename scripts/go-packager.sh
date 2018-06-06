@@ -11,6 +11,6 @@ cd src/*/vendor/github.com/cloudfoundry/libbuildpack/packager/buildpack-packager
 GOPATH="${cwd}/golib" go install
 cd $cwd
 rm -Rf golib
-buildpack-packager build --cached=true
+buildpack-packager build -any-stack -cached
 mv *.zip ../bp-cached
 
