@@ -42,7 +42,7 @@
     put: buildpack-store
     params:
       target: cloudfoundry_buildpack_php/
-      source: "*.zip"
+      source: "bp-cached/*.zip"
 #####
 
 # go
@@ -52,7 +52,7 @@
     put: buildpack-store
     params:
       target: cloudfoundry_buildpack_go/
-      source: "*.zip"
+      source: "bp-cached/*.zip"
 #####
 
 # ruby
@@ -62,7 +62,7 @@
     put: buildpack-store
     params:
       target: cloudfoundry_buildpack_ruby/
-      source: "*.zip"
+      source: "bp-cached/*.zip"
 #####
 
 # python
@@ -72,7 +72,7 @@
     put: buildpack-store
     params:
       target: cloudfoundry_buildpack_python/
-      source: "*.zip"
+      source: "bp-cached/*.zip"
 #####
 
 # binary
@@ -82,7 +82,7 @@
     put: buildpack-store
     params:
       target: cloudfoundry_buildpack_binary/
-      source: "*.zip"
+      source: "bp-cached/*.zip"
 #####
 
 # staticfile
@@ -92,7 +92,7 @@
     put: buildpack-store
     params:
       target: cloudfoundry_buildpack_staticfile/
-      source: "*.zip"
+      source: "bp-cached/*.zip"
 #####
 
 # java
@@ -102,7 +102,7 @@
     put: buildpack-store
     params:
       target: cloudfoundry_buildpack_java/
-      source: "*.zip"
+      source: "bp-cached/*.zip"
 #####
 
 # nodejs
@@ -112,5 +112,5 @@
     put: buildpack-store
     params:
       target: cloudfoundry_buildpack_nodejs/
-      source: "*.zip"
+      source: "bp-cached/*.zip"
 #####
