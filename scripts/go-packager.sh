@@ -1,5 +1,5 @@
 #!/bin/sh
-set -x
+set -xe
 cd bp-release
 git name-rev --tags --name-only $(git rev-parse HEAD) > ../bp-cached/tag
 cwd=$(pwd)

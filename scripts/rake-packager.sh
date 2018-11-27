@@ -1,5 +1,5 @@
 #!/bin/sh
-set -x
+set -xe
 cd bp-release
 mkdir src
 tar -xzf source.tar.gz -C src
