@@ -7,6 +7,14 @@ resources:
     secret_access_key: ((s3_secret_access_key))
     regexp: php_buildpack-cached-v(.*).zip
 
+- name: php-buildpack-cflinuxfs3-store
+  type: s3
+  source:
+    bucket: ((s3_bucket))
+    access_key_id: ((s3_access_key_id))
+    secret_access_key: ((s3_secret_access_key))
+    regexp: php_buildpack-cached-cflinuxfs3-v(.*).zip
+
 - name: go-buildpack-store
   type: s3
   source:
@@ -14,6 +22,14 @@ resources:
     access_key_id: ((s3_access_key_id))
     secret_access_key: ((s3_secret_access_key))
     regexp: go_buildpack-cached-v(.*).zip
+
+- name: go-buildpack-cflinuxfs3-store
+  type: s3
+  source:
+    bucket: ((s3_bucket))
+    access_key_id: ((s3_access_key_id))
+    secret_access_key: ((s3_secret_access_key))
+    regexp: go_buildpack-cached-cflinuxfs3-v(.*).zip
 
 - name: ruby-buildpack-store
   type: s3
@@ -23,6 +39,14 @@ resources:
     secret_access_key: ((s3_secret_access_key))
     regexp: ruby_buildpack-cached-v(.*).zip
 
+- name: ruby-buildpack-cflinuxfs3-store
+  type: s3
+  source:
+    bucket: ((s3_bucket))
+    access_key_id: ((s3_access_key_id))
+    secret_access_key: ((s3_secret_access_key))
+    regexp: ruby_buildpack-cached-cflinuxfs3-v(.*).zip
+
 - name: python-buildpack-store
   type: s3
   source:
@@ -30,6 +54,14 @@ resources:
     access_key_id: ((s3_access_key_id))
     secret_access_key: ((s3_secret_access_key))
     regexp: python_buildpack-cached-v(.*).zip
+
+- name: python-buildpack-cflinuxfs3-store
+  type: s3
+  source:
+    bucket: ((s3_bucket))
+    access_key_id: ((s3_access_key_id))
+    secret_access_key: ((s3_secret_access_key))
+    regexp: python_buildpack-cached-cflinuxfs3-v(.*).zip
 
 - name: binary-buildpack-store
   type: s3
@@ -39,6 +71,14 @@ resources:
     secret_access_key: ((s3_secret_access_key))
     regexp: binary_buildpack-cached-v(.*).zip
 
+- name: binary-buildpack-cflinuxfs3-store
+  type: s3
+  source:
+    bucket: ((s3_bucket))
+    access_key_id: ((s3_access_key_id))
+    secret_access_key: ((s3_secret_access_key))
+    regexp: binary_buildpack-cached-cflinuxfs3-v(.*).zip
+
 - name: staticfile-buildpack-store
   type: s3
   source:
@@ -47,6 +87,14 @@ resources:
     secret_access_key: ((s3_secret_access_key))
     regexp: staticfile_buildpack-cached-v(.*).zip
 
+- name: staticfile-buildpack-cflinuxfs3-store
+  type: s3
+  source:
+    bucket: ((s3_bucket))
+    access_key_id: ((s3_access_key_id))
+    secret_access_key: ((s3_secret_access_key))
+    regexp: staticfile_buildpack-cached-cflinuxfs3-v(.*).zip
+
 - name: nodejs-buildpack-store
   type: s3
   source:
@@ -54,6 +102,14 @@ resources:
     access_key_id: ((s3_access_key_id))
     secret_access_key: ((s3_secret_access_key))
     regexp: nodejs_buildpack-cached-v(.*).zip
+
+- name: nodejs-buildpack-cflinuxfs3-store
+  type: s3
+  source:
+    bucket: ((s3_bucket))
+    access_key_id: ((s3_access_key_id))
+    secret_access_key: ((s3_secret_access_key))
+    regexp: nodejs_buildpack-cached-cflinuxfs3-v(.*).zip
 
 - name: java-buildpack-store
   type: s3
@@ -171,8 +227,10 @@ jobs:
         args: [php]
   - put: php-buildpack-store
     params:
-      file: "bp-cached/*.zip"
-
+      file: "bp-cached/php_buildpack-cached-v*.zip"
+  - put: php-buildpack-cflinuxfs3-store
+    params:
+      file: "bp-cached/php_buildpack-cached-cflinuxfs3*.zip"
 
 - name: deploy-go
   serial: true
@@ -198,8 +256,10 @@ jobs:
         args: [go]
   - put: go-buildpack-store
     params:
-      file: "bp-cached/*.zip"
-
+      file: "bp-cached/go_buildpack-cached-v*.zip"
+  - put: go-buildpack-cflinuxfs3-store
+    params:
+      file: "bp-cached/go_buildpack-cached-cflinuxfs3*.zip"
 
 - name: deploy-ruby
   serial: true
@@ -225,7 +285,10 @@ jobs:
         args: [ruby]
   - put: ruby-buildpack-store
     params:
-      file: "bp-cached/*.zip"
+      file: "bp-cached/ruby_buildpack-cached-v*.zip"
+  - put: ruby-buildpack-cflinuxfs3-store
+    params:
+      file: "bp-cached/ruby_buildpack-cached-cflinuxfs3*.zip"
 
 - name: deploy-python
   serial: true
@@ -251,7 +314,10 @@ jobs:
         args: [python]
   - put: python-buildpack-store
     params:
-      file: "bp-cached/*.zip"
+      file: "bp-cached/python_buildpack-cached-v*.zip"
+  - put: python-buildpack-cflinuxfs3-store
+    params:
+      file: "bp-cached/python_buildpack-cached-cflinuxfs3-*.zip"
 
 - name: deploy-binary
   serial: true
@@ -277,7 +343,10 @@ jobs:
         args: [binary]
   - put: binary-buildpack-store
     params:
-      file: "bp-cached/*.zip"
+      file: "bp-cached/binary_buildpack-cached-v*.zip"
+  - put: binary-buildpack-cflinuxfs3-store
+    params:
+      file: "bp-cached/binary_buildpack-cached-cflinuxfs3-*.zip"
 
 - name: deploy-staticfile
   serial: true
@@ -303,7 +372,10 @@ jobs:
         args: [staticfile]
   - put: staticfile-buildpack-store
     params:
-      file: "bp-cached/*.zip"
+      file: "bp-cached/staticfile_buildpack-cached-v*.zip"
+  - put: staticfile-buildpack-cflinuxfs3-store
+    params:
+      file: "bp-cached/staticfile_buildpack-cached-cflinuxfs3-*.zip"
 
 - name: deploy-java
   serial: true
@@ -357,5 +429,8 @@ jobs:
         args: [nodejs]
   - put: nodejs-buildpack-store
     params:
-      file: "bp-cached/*.zip"
+      file: "bp-cached/nodejs_buildpack-cached-v*.zip"
+  - put: nodejs-buildpack-cflinuxfs3-store
+    params:
+      file: "bp-cached/nodejs_buildpack-cached-cflinuxfs3-*.zip"
 
