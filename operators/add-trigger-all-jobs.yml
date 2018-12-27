@@ -1,0 +1,65 @@
+- type: replace
+  path: /resource_types?/name=fly-resource?
+  value:
+    name: fly-resource
+    type: docker-image
+    source:
+      repository: orangecloudfoundry/concourse-fly-resource
+      tag: latest
+
+- type: replace
+  path: /resource_types?/name=cron-resource?
+  value:
+    name: cron-resource
+    type: docker-image
+    source:
+      repository: cftoolsmiths/cron-resource
+
+- type: replace
+  path: /resources/name=weekday-morning?
+  value:
+    name: weekday-morning
+    type: cron-resource
+    source:
+      expression: 40 8 * * 1-5
+      fire_immediately: true
+      location: Europe/Paris
+
+- type: replace
+  path: /resources/name=fly?
+  value:
+    name: fly
+    type: fly-resource
+    source:
+      url: ((concourse-url))
+      username: ((concourse-username))
+      password: ((concourse-password))
+      insecure: ((concourse-insecure))
+#      debug: true  # debug: Optional. Set to true to print commands for troubleshooting, including credentials.
+#      secure_output: Optional. Set to true to suppress output from fly.
+#      multiline_lines: Optional. Set to true to interpret \ as one line (mostly for big options line).
+
+# php
+- type: replace
+  path: /jobs/name=retrigger-all?
+  value:
+    name: retrigger-all
+    plan:
+      - aggregate:
+          - get: weekday-morning
+            trigger: true
+      - put: fly
+        params:
+          options:  |
+            trigger-job -j $BUILD_PIPELINE_NAME/deploy-php
+            trigger-job -j $BUILD_PIPELINE_NAME/deploy-go
+            trigger-job -j $BUILD_PIPELINE_NAME/deploy-ruby
+            trigger-job -j $BUILD_PIPELINE_NAME/deploy-python
+            trigger-job -j $BUILD_PIPELINE_NAME/deploy-binary
+            trigger-job -j $BUILD_PIPELINE_NAME/deploy-staticfile
+            trigger-job -j $BUILD_PIPELINE_NAME/deploy-java
+            trigger-job -j $BUILD_PIPELINE_NAME/deploy-nodejs
+
+- type: replace
+  path: /groups/name=all/jobs/-
+  value: retrigger-all

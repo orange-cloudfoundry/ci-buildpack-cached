@@ -54,3 +54,15 @@ Use artifactory instead of s3 to store your cached buildpack.
 - `artifactory-username`: Artifactory username to push your buildpack.
 - `artifactory-password`: Artifactory password to push your buildpack.
 
+### Add trigger all jobs 
+
+Add a job to trigger all other jobs
+
+**Command**: `bosh interpolate pipeline.yml -o operators/add-trigger-all-jobs.yml`
+
+**Credentials**:
+- `concourse-url`: Url to Concourse.
+- `concourse-username`: Concourse username to allow job triggering.
+- `concourse-password`: Concourse password to allow job triggering.
+- `concourse-insecure`: Skip SSL certificate checks 
+
