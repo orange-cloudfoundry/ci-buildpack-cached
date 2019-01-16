@@ -54,18 +54,24 @@ Use artifactory instead of s3 to store your cached buildpack.
 - `artifactory-username`: Artifactory username to push your buildpack.
 - `artifactory-password`: Artifactory password to push your buildpack.
 
+### Add trigger all jobs 
+
+Add a job to trigger all other jobs
+
+**Command**: `bosh interpolate pipeline.yml -o operators/add-trigger-all-jobs.yml`
+
 ### Detect buildpacks previous versions  
 
 By default, concourse only detects latest versions of buildpacks, use this operator to detect previous version.
 
 **Command**: `bosh interpolate pipeline.yml -o operators/detect-previous-versions.yml`
 
+
 **Credentials**:
 - `concourse-url`: Url to Concourse.
 - `concourse-username`: Concourse username to allow job triggering.
 - `concourse-password`: Concourse password to allow job triggering.
 - `concourse-insecure`: Skip SSL certificate checks 
-
 - `go-buildpack-version`: Check buildpack from this version 
 - `java-buildpack-version`: Check buildpack from this version
 - `dotnet-core-buildpack-version`: Check buildpack from this version
@@ -75,3 +81,4 @@ By default, concourse only detects latest versions of buildpacks, use this opera
 - `python-buildpack-version`: Check buildpack from this version 
 - `ruby-buildpack-version`: Check buildpack from this version 
 - `staticfile-buildpack-version`: Check buildpack from this version 
+
