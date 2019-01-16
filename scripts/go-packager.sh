@@ -9,6 +9,7 @@ export GOPATH="${cwd}/golib"
 if [ -f "go.mod" ]; then
 	export GOBIN=$(pwd)/.bin
 	export PATH="$GOBIN:$PATH"
+	rm -f go.sum
 	go mod download
 	go install github.com/cloudfoundry/libbuildpack/packager/buildpack-packager
 else
