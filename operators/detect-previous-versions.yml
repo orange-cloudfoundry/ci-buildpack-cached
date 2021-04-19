@@ -45,7 +45,7 @@
   value:
     name: detect-previous-versions
     plan:
-      - aggregate:
+      - in_parallel:
           - get: weekday-morning
             trigger: true
       - put: fly

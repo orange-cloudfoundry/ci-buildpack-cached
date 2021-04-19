@@ -206,7 +206,7 @@ jobs:
 - name: deploy-php
   serial: true
   plan:
-  - aggregate:
+  - in_parallel:
     - get: ci-scripts
     - get: php-bp-release
       trigger: true
@@ -235,7 +235,7 @@ jobs:
 - name: deploy-go
   serial: true
   plan:
-  - aggregate:
+  - in_parallel:
     - get: ci-scripts
     - get: go-bp-release
       trigger: true
@@ -264,7 +264,7 @@ jobs:
 - name: deploy-ruby
   serial: true
   plan:
-  - aggregate:
+  - in_parallel:
     - get: ci-scripts
     - get: ruby-bp-release
       trigger: true
@@ -293,7 +293,7 @@ jobs:
 - name: deploy-python
   serial: true
   plan:
-  - aggregate:
+  - in_parallel:
     - get: ci-scripts
     - get: python-bp-release
       trigger: true
@@ -322,7 +322,7 @@ jobs:
 - name: deploy-binary
   serial: true
   plan:
-  - aggregate:
+  - in_parallel:
     - get: ci-scripts
     - get: binary-bp-release
       trigger: true
@@ -351,7 +351,7 @@ jobs:
 - name: deploy-staticfile
   serial: true
   plan:
-  - aggregate:
+  - in_parallel:
     - get: ci-scripts
     - get: staticfile-bp-release
       trigger: true
@@ -380,7 +380,7 @@ jobs:
 - name: deploy-java
   serial: true
   plan:
-  - aggregate:
+  - in_parallel:
     - get: ci-scripts
     - get: java-bp-release
       params:
@@ -408,7 +408,7 @@ jobs:
 - name: deploy-nodejs
   serial: true
   plan:
-  - aggregate:
+  - in_parallel:
     - get: ci-scripts
     - get: nodejs-bp-release
       trigger: true

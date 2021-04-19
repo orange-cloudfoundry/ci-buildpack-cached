@@ -45,7 +45,7 @@
   value:
     name: retrigger-all
     plan:
-      - aggregate:
+      - in_parallel:
           - get: weekday-morning
             trigger: true
       - put: fly
