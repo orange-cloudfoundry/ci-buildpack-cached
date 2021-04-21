@@ -2,7 +2,7 @@
   path: /resource_types?/-
   value:
     name: artifactory
-    type: docker-image
+    type: registry-image
     source:
       repository: orangeopensource/artifactory-resource
 

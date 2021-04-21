@@ -272,7 +272,7 @@ jobs:
     config:
       platform: linux
       image_resource:
-        type: docker-image
+        type: registry-image
         source: { repository: orangeopensource/concourse, tag: "buildpack" }
       inputs:
       - name: ruby-bp-release
@@ -301,7 +301,7 @@ jobs:
     config:
       platform: linux
       image_resource:
-        type: docker-image
+        type: registry-image
         source: { repository: orangeopensource/concourse, tag: "buildpack" }
       inputs:
       - name: python-bp-release
@@ -330,7 +330,7 @@ jobs:
     config:
       platform: linux
       image_resource:
-        type: docker-image
+        type: registry-image
         source: { repository: orangeopensource/concourse, tag: "buildpack" }
       inputs:
       - name: binary-bp-release
@@ -359,7 +359,7 @@ jobs:
     config:
       platform: linux
       image_resource:
-        type: docker-image
+        type: registry-image
         source: { repository: orangeopensource/concourse, tag: "buildpack" }
       inputs:
       - name: staticfile-bp-release
@@ -390,7 +390,7 @@ jobs:
     config:
       platform: linux
       image_resource:
-        type: docker-image
+        type: registry-image
         source: { repository: orangeopensource/concourse, tag: "buildpack" }
       inputs:
       - name: java-bp-release
@@ -416,7 +416,7 @@ jobs:
     config:
       platform: linux
       image_resource:
-        type: docker-image
+        type: registry-image
         source: { repository: orangeopensource/concourse, tag: "buildpack" }
       inputs:
       - name: nodejs-bp-release
