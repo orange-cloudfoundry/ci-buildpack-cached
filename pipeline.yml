@@ -385,6 +385,8 @@ jobs:
     - get: java-bp-release
       params:
         include_source_tarball: true
+        globs:
+          - "s*gz"
       trigger: true
   - task: deploy-java
     config:
