@@ -2,7 +2,7 @@
   path: /resource_types?/name=fly-resource?
   value:
     name: fly-resource
-    type: docker-image
+    type: registry-image
     source:
       repository: orangecloudfoundry/concourse-fly-resource
       tag: latest
@@ -11,7 +11,7 @@
   path: /resource_types?/name=cron-resource?
   value:
     name: cron-resource
-    type: docker-image
+    type: registry-image
     source:
       repository: cftoolsmiths/cron-resource
 
@@ -45,7 +45,7 @@
   value:
     name: detect-previous-versions
     plan:
-      - aggregate:
+      - in_parallel:
           - get: weekday-morning
             trigger: true
       - put: fly
