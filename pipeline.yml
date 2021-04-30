@@ -214,7 +214,7 @@ jobs:
     config:
       platform: linux
       image_resource:
-        type: docker-image
+        type: registry-image
         source: { repository: orangeopensource/concourse, tag: "buildpack" }
       inputs:
       - name: php-bp-release
@@ -243,7 +243,7 @@ jobs:
     config:
       platform: linux
       image_resource:
-        type: docker-image
+        type: registry-image
         source: { repository: orangeopensource/concourse, tag: "buildpack" }
       inputs:
       - name: go-bp-release
