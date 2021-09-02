@@ -5,25 +5,18 @@
     type: registry-image
     source:
       repository: orangecloudfoundry/concourse-fly-resource
-      tag: latest
-
-- type: replace
-  path: /resource_types?/name=cron-resource?
-  value:
-    name: cron-resource
-    type: registry-image
-    source:
-      repository: cftoolsmiths/cron-resource
+      tag: 2.0.1-orange
 
 - type: replace
   path: /resources/name=weekday-morning?
   value:
     name: weekday-morning
-    type: cron-resource
+    type: time
     source:
-      expression: 40 8 * * 1-5
-      fire_immediately: true
       location: Europe/Paris
+      start: 8:00
+      stop: 9:00
+      days: [ Monday, Tuesday, Wednesday, Thursday, Friday ]
 
 - type: replace
   path: /resources/name=fly?
