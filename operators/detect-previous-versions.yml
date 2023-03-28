@@ -4,8 +4,8 @@
     name: fly-resource
     type: registry-image
     source:
-      repository: orangecloudfoundry/concourse-fly-resource
-      tag: 2.0.1-orange
+      repository: elpaasoci/concourse-fly-resource
+      tag: 2.0.2-orange
 
 - type: replace
   path: /resources/name=weekday-morning?
