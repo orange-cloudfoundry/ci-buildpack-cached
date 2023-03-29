@@ -11,7 +11,7 @@ if [ -f "go.mod" ]; then
 	export PATH="$GOBIN:$PATH"
 	rm -f go.sum
 	go mod download
-	go install github.com/cloudfoundry/libbuildpack/packager/buildpack-packager
+	go install github.com/cloudfoundry/libbuildpack/packager/buildpack-packager@latest
 else
 	ln -s "${first_folder}/vendor" golib/src
 	cd src/*/vendor/github.com/cloudfoundry/libbuildpack/packager/buildpack-packager
