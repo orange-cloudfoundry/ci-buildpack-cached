@@ -215,7 +215,7 @@ jobs:
       platform: linux
       image_resource:
         type: registry-image
-        source: { repository: orangeopensource/concourse, tag: "buildpack" }
+        source: { repository: ghcr.io/orange-cloudfoundry/ci-buildpack-cached, tag: latest }
       inputs:
       - name: php-bp-release
         path: bp-release
@@ -244,7 +244,7 @@ jobs:
       platform: linux
       image_resource:
         type: registry-image
-        source: { repository: orangeopensource/concourse, tag: "buildpack" }
+        source: { repository: ghcr.io/orange-cloudfoundry/ci-buildpack-cached, tag: latest }
       inputs:
       - name: go-bp-release
         path: bp-release
@@ -273,7 +273,7 @@ jobs:
       platform: linux
       image_resource:
         type: registry-image
-        source: { repository: orangeopensource/concourse, tag: "buildpack" }
+        source: { repository: ghcr.io/orange-cloudfoundry/ci-buildpack-cached, tag: latest }
       inputs:
       - name: ruby-bp-release
         path: bp-release
@@ -302,7 +302,7 @@ jobs:
       platform: linux
       image_resource:
         type: registry-image
-        source: { repository: orangeopensource/concourse, tag: "buildpack" }
+        source: { repository: ghcr.io/orange-cloudfoundry/ci-buildpack-cached, tag: latest }
       inputs:
       - name: python-bp-release
         path: bp-release
@@ -331,7 +331,7 @@ jobs:
       platform: linux
       image_resource:
         type: registry-image
-        source: { repository: orangeopensource/concourse, tag: "buildpack" }
+        source: { repository: ghcr.io/orange-cloudfoundry/ci-buildpack-cached, tag: latest }
       inputs:
       - name: binary-bp-release
         path: bp-release
@@ -360,7 +360,7 @@ jobs:
       platform: linux
       image_resource:
         type: registry-image
-        source: { repository: orangeopensource/concourse, tag: "buildpack" }
+        source: { repository: ghcr.io/orange-cloudfoundry/ci-buildpack-cached, tag: latest }
       inputs:
       - name: staticfile-bp-release
         path: bp-release
@@ -393,7 +393,7 @@ jobs:
       platform: linux
       image_resource:
         type: registry-image
-        source: { repository: orangeopensource/concourse, tag: "buildpack" }
+        source: { repository: ghcr.io/orange-cloudfoundry/ci-buildpack-cached, tag: latest }
       inputs:
       - name: java-bp-release
         path: bp-release
@@ -419,7 +419,7 @@ jobs:
       platform: linux
       image_resource:
         type: registry-image
-        source: { repository: orangeopensource/concourse, tag: "buildpack" }
+        source: { repository: ghcr.io/orange-cloudfoundry/ci-buildpack-cached, tag: latest }
       inputs:
       - name: nodejs-bp-release
         path: bp-release
