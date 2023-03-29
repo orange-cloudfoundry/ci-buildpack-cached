@@ -1,4 +1,4 @@
-FROM ruby:3.1-slim
+FROM ruby:3.0-slim
 
 ARG BOSH_CLI_VERSION="7.2.0"
 
