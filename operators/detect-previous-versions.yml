@@ -5,7 +5,7 @@
     type: registry-image
     source:
       repository: elpaasoci/concourse-fly-resource
-      tag: 2.0.2-orange
+      tag: 2.0.2-orange-20240314
 
 - type: replace
   path: /resources/name=weekday-morning?

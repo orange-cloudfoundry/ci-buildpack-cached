@@ -4,7 +4,7 @@
     name: slack-notification
     type: registry-image
     source:
-      repository: cfcommunity/slack-notification-resource
+      repository: elpaasoci/slack-notification-resource
       tag: latest
 
 - type: replace
