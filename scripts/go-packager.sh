@@ -20,7 +20,7 @@ else
 fi
 
 rm -Rf golib
-buildpack-packager build -any-stack -cached
-#buildpack-packager build -stack cflinuxfs4 -cached
+#buildpack-packager build -any-stack -cached
+buildpack-packager build -stack cflinuxfs4 -cached
 mv *.zip ../bp-cached
 
