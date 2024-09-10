@@ -1,29 +1,9 @@
-- type: replace
-  path: /resources/name=php-buildpack-store/source/endpoint?
-  value: ((s3_endpoint))
-- type: replace
-  path: /resources/name=php-buildpack-cflinuxfs4-store/source/endpoint?
-  value: ((s3_endpoint))
-
-- type: replace
-  path: /resources/name=go-buildpack-store/source/endpoint?
-  value: ((s3_endpoint))
-- type: replace
-  path: /resources/name=go-buildpack-cflinuxfs4-store/source/endpoint?
-  value: ((s3_endpoint))
 
 - type: replace
   path: /resources/name=ruby-buildpack-store/source/endpoint?
   value: ((s3_endpoint))
 - type: replace
   path: /resources/name=ruby-buildpack-cflinuxfs4-store/source/endpoint?
-  value: ((s3_endpoint))
-
-- type: replace
-  path: /resources/name=python-buildpack-store/source/endpoint?
-  value: ((s3_endpoint))
-- type: replace
-  path: /resources/name=python-buildpack-cflinuxfs4-store/source/endpoint?
   value: ((s3_endpoint))
 
 - type: replace
@@ -34,20 +14,5 @@
   value: ((s3_endpoint))
 
 - type: replace
-  path: /resources/name=staticfile-buildpack-store/source/endpoint?
-  value: ((s3_endpoint))
-- type: replace
-  path: /resources/name=staticfile-buildpack-cflinuxfs4-store/source/endpoint?
-  value: ((s3_endpoint))
-
-- type: replace
   path: /resources/name=java-buildpack-store/source/endpoint?
   value: ((s3_endpoint))
-
-- type: replace
-  path: /resources/name=nodejs-buildpack-store/source/endpoint?
-  value: ((s3_endpoint))
-- type: replace
-  path: /resources/name=nodejs-buildpack-cflinuxfs4-store/source/endpoint?
-  value: ((s3_endpoint))
-

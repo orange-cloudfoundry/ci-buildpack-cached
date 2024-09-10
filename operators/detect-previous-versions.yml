@@ -44,14 +44,9 @@
       - put: fly
         params:
           options:  |
-            check-resource -r $BUILD_PIPELINE_NAME/php-bp-release --from ref:v((php-buildpack-version))
-            check-resource -r $BUILD_PIPELINE_NAME/go-bp-release --from ref:v((go-buildpack-version))
             check-resource -r $BUILD_PIPELINE_NAME/ruby-bp-release --from ref:v((ruby-buildpack-version))
-            check-resource -r $BUILD_PIPELINE_NAME/python-bp-release --from ref:v((python-buildpack-version))
             check-resource -r $BUILD_PIPELINE_NAME/binary-bp-release --from ref:v((binary-buildpack-version))
-            check-resource -r $BUILD_PIPELINE_NAME/staticfile-bp-release --from ref:v((staticfile-buildpack-version))
             check-resource -r $BUILD_PIPELINE_NAME/java-bp-release --from ref:v((java-buildpack-version))
-            check-resource -r $BUILD_PIPELINE_NAME/nodejs-bp-release --from ref:v((nodejs-buildpack-version))
 
 - type: replace
   path: /groups/name=all/jobs/-

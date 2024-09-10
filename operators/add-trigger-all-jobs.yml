@@ -44,14 +44,9 @@
       - put: fly
         params:
           options:  |
-            trigger-job -j $BUILD_PIPELINE_NAME/deploy-php
-            trigger-job -j $BUILD_PIPELINE_NAME/deploy-go
             trigger-job -j $BUILD_PIPELINE_NAME/deploy-ruby
-            trigger-job -j $BUILD_PIPELINE_NAME/deploy-python
             trigger-job -j $BUILD_PIPELINE_NAME/deploy-binary
-            trigger-job -j $BUILD_PIPELINE_NAME/deploy-staticfile
             trigger-job -j $BUILD_PIPELINE_NAME/deploy-java
-            trigger-job -j $BUILD_PIPELINE_NAME/deploy-nodejs
 
 - type: replace
   path: /groups/name=all/jobs/-
