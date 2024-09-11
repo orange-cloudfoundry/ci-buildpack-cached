@@ -24,9 +24,10 @@ jobs:
 
     -
       name: build and publish 'buildpack' image
-      uses: docker/build-push-action@v5.1.0
+      uses: docker/build-push-action@v6.7.0
       with:
-        context: buildpack-image
+        #context: buildpack-image
+        file: buildpack-image/Dockerfile
         push: true
         tags: |          
           ghcr.io/${{github.repository}}:${{github.sha}}

@@ -1,35 +1,4 @@
 resources:
-- name: php-buildpack-store
-  type: s3
-  source:
-    bucket: ((s3_bucket))
-    access_key_id: ((s3_access_key_id))
-    secret_access_key: ((s3_secret_access_key))
-    regexp: php_buildpack-cached-v(.*).zip
-
-- name: php-buildpack-cflinuxfs3-store
-  type: s3
-  source:
-    bucket: ((s3_bucket))
-    access_key_id: ((s3_access_key_id))
-    secret_access_key: ((s3_secret_access_key))
-    regexp: php_buildpack-cached-cflinuxfs3-v(.*).zip
-
-- name: go-buildpack-store
-  type: s3
-  source:
-    bucket: ((s3_bucket))
-    access_key_id: ((s3_access_key_id))
-    secret_access_key: ((s3_secret_access_key))
-    regexp: go_buildpack-cached-v(.*).zip
-
-- name: go-buildpack-cflinuxfs3-store
-  type: s3
-  source:
-    bucket: ((s3_bucket))
-    access_key_id: ((s3_access_key_id))
-    secret_access_key: ((s3_secret_access_key))
-    regexp: go_buildpack-cached-cflinuxfs3-v(.*).zip
 
 - name: ruby-buildpack-store
   type: s3
@@ -39,29 +8,13 @@ resources:
     secret_access_key: ((s3_secret_access_key))
     regexp: ruby_buildpack-cached-v(.*).zip
 
-- name: ruby-buildpack-cflinuxfs3-store
+- name: ruby-buildpack-cflinuxfs4-store
   type: s3
   source:
     bucket: ((s3_bucket))
     access_key_id: ((s3_access_key_id))
     secret_access_key: ((s3_secret_access_key))
-    regexp: ruby_buildpack-cached-cflinuxfs3-v(.*).zip
-
-- name: python-buildpack-store
-  type: s3
-  source:
-    bucket: ((s3_bucket))
-    access_key_id: ((s3_access_key_id))
-    secret_access_key: ((s3_secret_access_key))
-    regexp: python_buildpack-cached-v(.*).zip
-
-- name: python-buildpack-cflinuxfs3-store
-  type: s3
-  source:
-    bucket: ((s3_bucket))
-    access_key_id: ((s3_access_key_id))
-    secret_access_key: ((s3_secret_access_key))
-    regexp: python_buildpack-cached-cflinuxfs3-v(.*).zip
+    regexp: ruby_buildpack-cached-cflinuxfs4-v(.*).zip
 
 - name: binary-buildpack-store
   type: s3
@@ -71,45 +24,13 @@ resources:
     secret_access_key: ((s3_secret_access_key))
     regexp: binary_buildpack-cached-v(.*).zip
 
-- name: binary-buildpack-cflinuxfs3-store
+- name: binary-buildpack-cflinuxfs4-store
   type: s3
   source:
     bucket: ((s3_bucket))
     access_key_id: ((s3_access_key_id))
     secret_access_key: ((s3_secret_access_key))
-    regexp: binary_buildpack-cached-cflinuxfs3-v(.*).zip
-
-- name: staticfile-buildpack-store
-  type: s3
-  source:
-    bucket: ((s3_bucket))
-    access_key_id: ((s3_access_key_id))
-    secret_access_key: ((s3_secret_access_key))
-    regexp: staticfile_buildpack-cached-v(.*).zip
-
-- name: staticfile-buildpack-cflinuxfs3-store
-  type: s3
-  source:
-    bucket: ((s3_bucket))
-    access_key_id: ((s3_access_key_id))
-    secret_access_key: ((s3_secret_access_key))
-    regexp: staticfile_buildpack-cached-cflinuxfs3-v(.*).zip
-
-- name: nodejs-buildpack-store
-  type: s3
-  source:
-    bucket: ((s3_bucket))
-    access_key_id: ((s3_access_key_id))
-    secret_access_key: ((s3_secret_access_key))
-    regexp: nodejs_buildpack-cached-v(.*).zip
-
-- name: nodejs-buildpack-cflinuxfs3-store
-  type: s3
-  source:
-    bucket: ((s3_bucket))
-    access_key_id: ((s3_access_key_id))
-    secret_access_key: ((s3_secret_access_key))
-    regexp: nodejs_buildpack-cached-cflinuxfs3-v(.*).zip
+    regexp: binary_buildpack-cached-cflinuxfs4-v(.*).zip
 
 - name: java-buildpack-store
   type: s3
@@ -124,40 +45,15 @@ resources:
   type: git
   source:
     uri: https://github.com/orange-cloudfoundry/ci-buildpack-cached.git
-- name: php-bp-release
-  type: git
-  source:
-    uri: https://github.com/cloudfoundry/php-buildpack.git
-    tag_filter: "v*"
-- name: go-bp-release
-  type: git
-  source:
-    uri: https://github.com/cloudfoundry/go-buildpack.git
-    tag_filter: "v*"
 - name: ruby-bp-release
   type: git
   source:
     uri: https://github.com/cloudfoundry/ruby-buildpack.git
     tag_filter: "v*"
-- name: python-bp-release
-  type: git
-  source:
-    uri: https://github.com/cloudfoundry/python-buildpack.git
-    tag_filter: "v*"
 - name: binary-bp-release
   type: git
   source:
     uri: https://github.com/cloudfoundry/binary-buildpack.git
-    tag_filter: "v*"
-- name: staticfile-bp-release
-  type: git
-  source:
-    uri: https://github.com/cloudfoundry/staticfile-buildpack.git
-    tag_filter: "v*"
-- name: nodejs-bp-release
-  type: git
-  source:
-    uri: https://github.com/cloudfoundry/nodejs-buildpack.git
     tag_filter: "v*"
 - name: java-bp-release
   type: github-release
@@ -169,97 +65,20 @@ resources:
 groups:
 - name: all
   jobs:
-  - deploy-php
-  - deploy-go
   - deploy-ruby
-  - deploy-python
   - deploy-binary
-  - deploy-staticfile
   - deploy-java
-  - deploy-nodejs
-- name: php
-  jobs:
-  - deploy-php
-- name: go
-  jobs:
-  - deploy-go
 - name: ruby
   jobs:
   - deploy-ruby
-- name: python
-  jobs:
-  - deploy-python
 - name: binary
   jobs:
   - deploy-binary
-- name: staticfile
-  jobs:
-  - deploy-staticfile
 - name: java
   jobs:
   - deploy-java
-- name: nodejs
-  jobs:
-  - deploy-nodejs
 
 jobs:
-- name: deploy-php
-  serial: true
-  plan:
-  - in_parallel:
-    - get: ci-scripts
-    - get: php-bp-release
-      trigger: true
-  - task: deploy-php
-    config:
-      platform: linux
-      image_resource:
-        type: registry-image
-        source: { repository: ghcr.io/orange-cloudfoundry/ci-buildpack-cached, tag: latest }
-      inputs:
-      - name: php-bp-release
-        path: bp-release
-      - name: ci-scripts
-      outputs:
-      - name: bp-cached
-      run:
-        path: ci-scripts/scripts/ruby-packager.sh
-        args: [php]
-  - put: php-buildpack-store
-    params:
-      file: "bp-cached/php_buildpack-cached-v*.zip"
-  - put: php-buildpack-cflinuxfs3-store
-    params:
-      file: "bp-cached/php_buildpack-cached-cflinuxfs3*.zip"
-
-- name: deploy-go
-  serial: true
-  plan:
-  - in_parallel:
-    - get: ci-scripts
-    - get: go-bp-release
-      trigger: true
-  - task: deploy-go
-    config:
-      platform: linux
-      image_resource:
-        type: registry-image
-        source: { repository: ghcr.io/orange-cloudfoundry/ci-buildpack-cached, tag: latest }
-      inputs:
-      - name: go-bp-release
-        path: bp-release
-      - name: ci-scripts
-      outputs:
-      - name: bp-cached
-      run:
-        path: ci-scripts/scripts/go-packager.sh
-        args: [go]
-  - put: go-buildpack-store
-    params:
-      file: "bp-cached/go_buildpack-cached-v*.zip"
-  - put: go-buildpack-cflinuxfs3-store
-    params:
-      file: "bp-cached/go_buildpack-cached-cflinuxfs3*.zip"
 
 - name: deploy-ruby
   serial: true
@@ -286,38 +105,9 @@ jobs:
   - put: ruby-buildpack-store
     params:
       file: "bp-cached/ruby_buildpack-cached-v*.zip"
-  - put: ruby-buildpack-cflinuxfs3-store
+  - put: ruby-buildpack-cflinuxfs4-store
     params:
-      file: "bp-cached/ruby_buildpack-cached-cflinuxfs3*.zip"
-
-- name: deploy-python
-  serial: true
-  plan:
-  - in_parallel:
-    - get: ci-scripts
-    - get: python-bp-release
-      trigger: true
-  - task: deploy-python
-    config:
-      platform: linux
-      image_resource:
-        type: registry-image
-        source: { repository: ghcr.io/orange-cloudfoundry/ci-buildpack-cached, tag: latest }
-      inputs:
-      - name: python-bp-release
-        path: bp-release
-      - name: ci-scripts
-      outputs:
-      - name: bp-cached
-      run:
-        path: ci-scripts/scripts/go-packager.sh
-        args: [python]
-  - put: python-buildpack-store
-    params:
-      file: "bp-cached/python_buildpack-cached-v*.zip"
-  - put: python-buildpack-cflinuxfs3-store
-    params:
-      file: "bp-cached/python_buildpack-cached-cflinuxfs3-*.zip"
+      file: "bp-cached/ruby_buildpack-cached-cflinuxfs4*.zip"
 
 - name: deploy-binary
   serial: true
@@ -344,38 +134,9 @@ jobs:
   - put: binary-buildpack-store
     params:
       file: "bp-cached/binary_buildpack-cached-v*.zip"
-  - put: binary-buildpack-cflinuxfs3-store
+  - put: binary-buildpack-cflinuxfs4-store
     params:
-      file: "bp-cached/binary_buildpack-cached-cflinuxfs3-*.zip"
-
-- name: deploy-staticfile
-  serial: true
-  plan:
-  - in_parallel:
-    - get: ci-scripts
-    - get: staticfile-bp-release
-      trigger: true
-  - task: deploy-staticfile
-    config:
-      platform: linux
-      image_resource:
-        type: registry-image
-        source: { repository: ghcr.io/orange-cloudfoundry/ci-buildpack-cached, tag: latest }
-      inputs:
-      - name: staticfile-bp-release
-        path: bp-release
-      - name: ci-scripts
-      outputs:
-      - name: bp-cached
-      run:
-        path: ci-scripts/scripts/go-packager.sh
-        args: [staticfile]
-  - put: staticfile-buildpack-store
-    params:
-      file: "bp-cached/staticfile_buildpack-cached-v*.zip"
-  - put: staticfile-buildpack-cflinuxfs3-store
-    params:
-      file: "bp-cached/staticfile_buildpack-cached-cflinuxfs3-*.zip"
+      file: "bp-cached/binary_buildpack-cached-cflinuxfs4-*.zip"
 
 - name: deploy-java
   serial: true
@@ -406,33 +167,4 @@ jobs:
   - put: java-buildpack-store
     params:
       file: "bp-cached/*.zip"
-
-- name: deploy-nodejs
-  serial: true
-  plan:
-  - in_parallel:
-    - get: ci-scripts
-    - get: nodejs-bp-release
-      trigger: true
-  - task: deploy-nodejs
-    config:
-      platform: linux
-      image_resource:
-        type: registry-image
-        source: { repository: ghcr.io/orange-cloudfoundry/ci-buildpack-cached, tag: latest }
-      inputs:
-      - name: nodejs-bp-release
-        path: bp-release
-      - name: ci-scripts
-      outputs:
-      - name: bp-cached
-      run:
-        path: ci-scripts/scripts/go-packager.sh
-        args: [nodejs]
-  - put: nodejs-buildpack-store
-    params:
-      file: "bp-cached/nodejs_buildpack-cached-v*.zip"
-  - put: nodejs-buildpack-cflinuxfs3-store
-    params:
-      file: "bp-cached/nodejs_buildpack-cached-cflinuxfs3-*.zip"
 
