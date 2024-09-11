@@ -19,3 +19,5 @@ RUN mkdir -p /gopath/bin
 ENV GOPATH /gopath
 ENV GOBIN /gopath/bin
 ENV PATH $PATH:/usr/local/go/bin:$GOPATH/bin
+
+ADD ../scripts ci-scripts/scripts
